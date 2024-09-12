@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+
+        <section class="container">
+            <h2
+                class="text-center my-5"
+                th:text="${edicion ? 'Modificar Docente' : 'Nuevo Docente'}"
+            ></h2>
+            <div class="mx-auto" style="max-width: 576px">
+                <form
+                    th:action="${edicion} ? '/docentes/modificar-docente' : '/docentes/guardar-docente'"
+                    th:object="${docente}"
+                    method="post"
+                >
+                    
+                    <div th:if="${edicion}">
+                    <input type="hidden"
+                           name="idDocente"
+                           th:field="*{idDocente}" />
+               		 </div>
+                    
+                    
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">Legajo</label>
+                        <input
+                            type="text"
+                            th:class="'form-control ' + ${edicion ? 'form-control opacity-75' : ''}"
+                            id="codigo"
+                            name="codigo"
+                            th:field="*{legajo}"
+                            th:readonly="${edicion}"
+                            th:classappend="${#fields.hasErrors('legajo')} ? 'is-invalid' : ''"
+                        />
+                        <p 
+                        	class="form-text text-danger"
+							th:if="${#fields.hasErrors('legajo')}" 
+							th:errors="*{legajo}">
+						</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="nombre"
+                            name="nombre"
+                            th:field="*{nombre}"
+                            th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''"
+                        ><p 
+                        	class="form-text text-danger"
+							th:if="${#fields.hasErrors('nombre')}" 
+							th:errors="*{nombre}">
+						</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="apellido"
+                            name="apellido"
+                            th:field="*{apellido}"
+                            th:classappend="${#fields.hasErrors('apellido')} ? 'is-invalid' : ''"
+                        >
+                        <p 
+                        	class="form-text text-danger"
+							th:if="${#fields.hasErrors('apellido')}" 
+							th:errors="*{apellido}">
+						</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            th:field="*{email}"
+                            th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
+                        >
+                        <p 
+                        	class="form-text text-danger"
+							th:if="${#fields.hasErrors('email')}" 
+							th:errors="*{email}">
+						</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Telefono</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="telefono"
+                            name="telefono"
+                            th:field="*{telefono}"
+                            th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid' : ''"
+                        >
+                        <p 
+                        	class="form-text text-danger"
+							th:if="${#fields.hasErrors('telefono')}" 
+							th:errors="*{telefono}">
+						</p>
+                    </div>
+                    
+                    
+                    <div th:if="${edicion}" class="mb-3">
+                        <label>Estado</label>
+                        <div class="d-flex justify-content-between" style="max-width: 200px">
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault1"
+                                    value="true"
+                                    th:field="*{estado}"
+                                >
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Activa
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault2"
+                                    value="false"
+                                    th:field="*{estado}"
+                                >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Inactiva
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        th:text="${edicion ? 'Modificar' : 'Guardar'}"
+                    >
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

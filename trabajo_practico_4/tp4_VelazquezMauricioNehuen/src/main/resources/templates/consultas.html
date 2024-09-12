@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+		<section class="container">
+			<nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
+	  			<a class="navbar-brand" href="#">Consulta de Alumnos</a>
+	  			 <h6 class="text-center my-5" th:text="${nombre} ? ${texto} : ''"></h6>
+				  <ul class="nav nav-pills">
+				    <li class="nav-item dropdown">
+				      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Carreras</a>
+				      <ul class="dropdown-menu">
+				      	<li th:each="c: ${carreras}" th:value="${c.idCarrera}">
+				      		<a class="dropdown-item" th:href="@{/consultas/carrera/{id} (id=${c.idCarrera})}" th:text="${c.nombre}"></a>
+				      	</li>
+				      </ul>
+				    <li class="nav-item dropdown">
+				      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Materias</a>
+				      <ul class="dropdown-menu">
+				      	<li th:each="m: ${materias}" th:value="${m.idMateria}">
+				      		<a class="dropdown-item" th:href="@{/consultas/materia/{id} (id=${m.idMateria})}" th:text="${m.nombre}"></a>
+				      	</li>
+				      </ul>
+				    </li>
+				  </ul>
+				</nav>
+				<table class="table table-striped">
+	                <thead>
+	                    <tr>
+	                        <th scope="col">L.U</th>
+	                        <th scope="col">Nombre</th>
+	                        <th scope="col">Apellido</th>
+	                        <th scope="col">Email</th>
+	                        <th scope="col">Fecha Nacimiento</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr th:each="alumno : ${alumnos}">
+	                        <td th:text="${alumno.lu}"></td>
+	                        <td th:text="${alumno.nombre}"></td>
+	                        <td th:text="${alumno.apellido}"></td>
+	                        <td th:text="${alumno.email}"></td>
+	                        <td th:text="${alumno.fechaNacimiento}"></td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	         </section> 
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

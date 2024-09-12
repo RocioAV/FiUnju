@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+
+        <section class="container">
+            <h2 class="text-center my-5">Listado de Docentes</h2>
+
+            <div class="d-flex justify-content-end mb-2">
+                <a th:href="@{/docentes/nuevo-docente}" class="btn btn-primary">Nuevo Docente</a>
+            </div>
+
+            <div th:if="${isAdded}" id="alert" class="alert alert-success" role="alert">
+                Docente agregado correctamente
+            </div>
+
+            <div th:if="${isUpdated}" id="alertEdit" class="alert alert-primary" role="alert">
+                Docente modificado correctamente
+            </div>
+
+            <div th:if="${docentes.isEmpty()}" class="alert alert-warning text-center fw-bold">
+                No hay docentes cargados. Puede cargar un nuevo docente haciendo click en el botón "Nuevo Docente".
+            </div>
+            <table class="table table-striped" th:unless="${docentes.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th scope="col">Legajo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="docente : ${docentes}">
+                        <td th:text="${docente.legajo}"></td>
+                        <td th:text="${docente.nombre}"></td>
+                        <td th:text="${docente.apellido}"></td>
+                        <td th:text="${docente.email}"></td>
+                        <td th:text="${docente.telefono}"></td>
+                        <td th:text="${docente.materia != null ? docente.materia.nombre : 'Sin materia asignada'}"></td>
+                        <td>
+                            <a
+                                class="btn btn-warning"
+                                th:href="@{/docentes/editar-docente/{id}(id=${docente.idDocente})}"
+                            >Editar</a>
+                            <a
+                                class="btn btn-danger"
+                                th:data-id="${docente.idDocente}"
+                                th:data-legajo="${docente.legajo}"
+                                onclick="confirmDelete(this.getAttribute('data-id'),this.getAttribute('data-legajo'))"
+                            >Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+        <script>
+            /**
+             * Confirmar eliminación de un docente
+             * @param legajo
+             */
+            function confirmDelete(id,legajo) {
+                if (confirm('¿Está seguro que desea eliminar el docente con Legajo ' + legajo + '?')) {
+                    window.location.href = '/docentes/eliminar-docente/' + id;
+                }
+            }
+
+            // Ocultar alerta de éxito
+            setTimeout(() => {
+                document.getElementById('alert').style.display = 'none';
+            }, 3000);
+
+            // Ocultar alerta de edicion
+            setTimeout(() => {
+                document.getElementById('alertEdit').style.display = 'none';
+            }, 3000);
+        </script>
+
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+
+        <section class="container">
+            <h2 class="text-center my-5">Listado de Carreras</h2>
+
+            <div class="d-flex justify-content-end mb-2">
+                <a th:href="@{/carreras/nueva-carrera}" class="btn btn-primary">Nueva Carrera</a>
+            </div>
+
+            <div th:if="${isAdded}" id="alert" class="alert alert-success" role="alert">
+                Materia agregada correctamente
+            </div>
+
+            <div th:if="${isUpdated}" id="alertEdit" class="alert alert-primary" role="alert">
+                Materia modificada correctamente
+            </div>
+
+            <div th:if="${carreras.isEmpty()}" class="alert alert-warning text-center fw-bold">
+                No hay carreras cargadas. Puede cargar una nueva carrera haciendo click en el botón "Nueva Carrera".
+            </div>
+            <table class="table table-striped" th:unless="${carreras.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Duración</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="carrera : ${carreras}">
+                        <td th:text="${carrera.codigo}"></td>
+                        <td th:text="${carrera.nombre}"></td>
+                        <td th:text="${carrera.cantidadAnios} + ' años'"></td>
+                        <td>
+                            <span
+                                th:if="${carrera.estado}"
+                                class="bg-success rounded-5 px-2 py-1 text-white fw-semibold"
+                            >Activa</span>
+                            <span
+                                th:unless="${carrera.estado}"
+                                class="bg-danger rounded-5 px-2 py-1 text-white fw-semibold"
+                            >Inactiva</span>
+                        </td>
+                        <td>
+                            <a
+                                th:href="@{/carreras/editar-carrera/{id} (id=${carrera.idCarrera})}"
+                                class="btn btn-warning"
+                            >Editar</a>
+                            <a
+                                th:data-codigo="${carrera.codigo}"
+                                th:data-id="${carrera.idCarrera}"
+                                class="btn btn-danger"
+                                onclick="confirmDelete(this.getAttribute('data-codigo'),this.getAttribute('data-id'))"
+                            >Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+        <script>
+            /**
+             * Confirmar eliminación de una carrera
+             * @param codigo
+             */
+            function confirmDelete(codigo,id) {
+                if (confirm('¿Está seguro que desea eliminar la carrera de codigo: ' + codigo + '?')) {
+                    window.location.href = '/carreras/eliminar-carrera/' + id;
+                }
+            }
+
+            // Ocultar alerta de éxito
+            setTimeout(() => {
+                document.getElementById('alert').style.display = 'none';
+            }, 3000);
+
+            // Ocultar alerta de edicion
+            setTimeout(() => {
+                document.getElementById('alertEdit').style.display = 'none';
+            }, 3000);
+        </script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

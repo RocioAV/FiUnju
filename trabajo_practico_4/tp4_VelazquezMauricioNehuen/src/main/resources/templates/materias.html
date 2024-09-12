@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+
+        <section class="container">
+            <h2 class="text-center my-5">Listado de Materias</h2>
+
+            <div class="d-flex justify-content-end mb-2">
+                <a th:href="@{/materias/nueva-materia}" class="btn btn-primary">Nueva Materia</a>
+            </div>
+
+            <div th:if="${isAdded}" id="alert" class="alert alert-success" role="alert">
+                Materia agregada correctamente
+            </div>
+
+            <div th:if="${isUpdated}" id="alertEdit" class="alert alert-primary" role="alert">
+                Materia modificada correctamente
+            </div>
+
+            <div th:if="${materias.isEmpty()}" class="alert alert-warning text-center fw-bold">
+                No hay materias cargadas. Puede crear una nueva materia haciendo click en el botón "Nueva Materia".
+            </div>
+            <table class="table table-striped" th:unless="${materias.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Curso</th>
+                        <th scope="col">Docente</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="materia : ${materias}">
+                        <td th:text="${materia.codigo}"></td>
+                        <td th:text="${materia.nombre}"></td>
+                        <td th:text="${materia.curso}"></td>
+                        <td th:text="${materia.docente} ? ${materia.docente.apellido} + ' ' + ${materia.docente.nombre} : 'No asignado'"></td>
+                        <td th:text="${materia.carrera} ? ${materia.carrera.nombre} : 'No asigando'"></td>
+                        <td>
+                            <a
+                                class="btn btn-warning"
+                                th:href="@{/materias/editar-materia/{id}(id=${materia.idMateria})}"
+                            >Editar</a>
+                            <a
+                                class="btn btn-danger"
+                                th:data-id="${materia.idMateria}"
+                                th:data-codigo="${materia.codigo}"
+                                onclick="confirmDelete(this.getAttribute('data-codigo'),this.getAttribute('data-id'))"
+                            >Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+        <script>
+            /**
+             * Confirmar eliminación de una materia
+             * @param codigo
+             */
+            function confirmDelete(codigo,id) {
+                if (confirm('¿Está seguro que desea eliminar la materia de codigo: ' + codigo + '?')) {
+                    window.location.href = '/materias/eliminar-materia/' + id;
+                }
+            }
+
+            // Ocultar alerta de éxito
+            setTimeout(() => {
+                document.getElementById('alert').style.display = 'none';
+            }, 3000);
+
+            // Ocultar alerta de edicion
+            setTimeout(() => {
+                document.getElementById('alertEdit').style.display = 'none';
+            }, 3000);
+        </script>
+
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+
+        <section class="container">
+            <h2 class="text-center my-5">Listado de Alumnos</h2>
+
+            <div class="d-flex justify-content-end mb-2">
+                <a th:href="@{/alumnos/nuevo-alumno}" class="btn btn-primary">Nuevo Alumno</a>
+            </div>
+
+            <div th:if="${isAdded}" id="alert" class="alert alert-success" role="alert">
+                Alumno agregado correctamente
+            </div>
+
+            <div th:if="${isUpdated}" id="alertEdit" class="alert alert-primary" role="alert">
+                Alumno modificado correctamente
+            </div>
+
+            <div th:if="${alumnos.isEmpty()}" class="alert alert-warning text-center fw-bold">
+                No hay alumnos cargados. Puede cargar un nuevo alumno haciendo click en el botón "Nuevo Alumno".
+            </div>
+            <table class="table table-striped" th:unless="${alumnos.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th scope="col">L.U</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Fecha Nacimiento</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="alumno : ${alumnos}">
+                        <td th:text="${alumno.lu}"></td>
+                        <td th:text="${alumno.nombre}"></td>
+                        <td th:text="${alumno.apellido}"></td>
+                        <td th:text="${alumno.email}"></td>
+                        <td th:text="${alumno.fechaNacimiento}"></td>
+                        <td th:text="${alumno.carrera != null ? alumno.carrera.nombre : 'Sin carrera asignada'}"></td>
+                        <td>
+                            <a
+                                class="btn btn-warning"
+                                th:href="@{/alumnos/editar-alumno/{id}(id=${alumno.idAlumno})}"
+                            >Editar</a>
+                            <a
+                                class="btn btn-danger"
+                                th:data-id="${alumno.idAlumno}"
+                                th:data-dni="${alumno.dni}"
+                                onclick="confirmDelete(this.getAttribute('data-id'),this.getAttribute('data-dni'))"
+                            >Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+        <script>
+            /**
+             * Confirmar eliminación de un alumno
+             * @param dni
+             */
+            function confirmDelete(id,dni) {
+                if (confirm('¿Está seguro que desea eliminar el alumno con DNI ' + dni + '?')) {
+                    window.location.href = '/alumnos/eliminar-alumno/' + id;
+                }
+            }
+
+            // Ocultar alerta de éxito
+            setTimeout(() => {
+                document.getElementById('alert').style.display = 'none';
+            }, 3000);
+
+            // Ocultar alerta de edicion
+            setTimeout(() => {
+                document.getElementById('alertEdit').style.display = 'none';
+            }, 3000);
+        </script>
+
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

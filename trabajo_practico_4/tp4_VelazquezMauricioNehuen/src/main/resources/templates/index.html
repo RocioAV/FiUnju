@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+
+        <div class="container mt-5">
+            <div class="row">
+                <main class="col-md-9">
+                    <section class="shadow-sm py-4" id="descripcion">
+                        <h2>Facultad de Ingeniería - Universidad Nacional de Jujuy</h2>
+                        <div class="py-4 m-auto" style="max-width: 768px">
+                            <img src="/images/fi-unju-main.jpg" alt="fi-unju edificio" class="img-fluid">
+                        </div>
+                        <p>
+                            La Facultad de Ingeniería de la Universidad Nacional de Jujuy (UNJu) se dedica a la
+                            formación de ingenieros altamente capacitados, comprometidos con la innovación, el
+                            desarrollo sostenible y el progreso regional. Con un enfoque en la excelencia académica y la
+                            investigación aplicada, la facultad ofrece una variedad de programas de grado y posgrado en
+                            diversas disciplinas de la ingeniería.
+                        </p>
+                        <p>
+                            Nuestra misión es proporcionar una educación de calidad que prepare a nuestros estudiantes
+                            para enfrentar los desafíos tecnológicos del futuro, contribuyendo al desarrollo
+                            socioeconómico de la región de Jujuy y del país. Fomentamos un ambiente de aprendizaje
+                            dinámico e inclusivo, apoyado por una infraestructura moderna y recursos académicos de
+                            vanguardia.
+                        </p>
+                        <p>
+                            Los estudiantes de la Facultad de Ingeniería tienen acceso a una amplia gama de
+                            oportunidades de aprendizaje práctico, proyectos de investigación y programas de intercambio
+                            internacional. Además, contamos con una sólida red de colaboración con la industria y otras
+                            instituciones académicas, lo que facilita la inserción laboral y el desarrollo profesional
+                            de nuestros egresados.
+                        </p>
+                    </section>
+
+                    <section id="noticias">
+
+                        <h2 class="text-center my-3">Noticias</h2>
+
+                        <article class="shadow-sm py-4">
+                            <h3>Campaña de vacunación UNJu 2024</h3>
+                            <div class="py-3 m-auto" style="max-width: 480px">
+                                <img src="/images/vacunacion-unju-2024.jpg" alt="vacunacion unju" class="img-fluid">
+                            </div>
+                            <p>
+                                El día 29 de mayo del corriente, en el Aula Pelayo Pena de la Escuela de Minas "Dr.
+                                Horacio Carrillo" de la UNJu, se realizará una Jornada de Vacunación destinada a
+                                Estudiantes, Personal Docentes y No Docente de la Universidad Nacional de Jujuy, en el
+                                horario de 09:00 a 15:30 horas.
+                            </p>
+                        </article>
+
+
+                        <article class="shadow-sm py-4">
+                            <h3>52° Aniversario de la Facultad de Ingeniería de la UNJu</h3>
+                            <div class="py-3 m-auto" style="max-width: 480px">
+                                <img src="/images/fi-cumple.jpg" alt="vacunacion unju" class="img-fluid">
+                            </div>
+                            <p>¡52° Aniversario de nuestra querida Facultad de Ingeniería!</p>
+                            <p>
+                                Y lo festeja con una riquísima chocolatada, mañana viernes 24 de mayo a las 10.00 hs en
+                                el patio de Decanato
+                            </p>
+                            <p>¡Quedan todos invitados!</p>
+                        </article>
+
+
+                        <article class="shadow-sm py-4">
+                            <h3>Citación a Sesión CAFI - Jueves 23 de mayo/2024</h3>
+                            <div class="py-3 m-auto" style="max-width: 580px">
+                                <img src="/images/cafi.jpg" alt="vacunacion unju" class="img-fluid">
+                            </div>
+                            <p>
+                                SESIÓN ORDINARIA del Consejo Académico para el día
+                                <span class="fw-bold">jueves 23 de mayo de 2024 a horas 15:00</span>,
+                                en la Sala de Profesores de la Facultad de Ingeniería - Ítalo Palanca Nº 10
+                            </p>
+                        </article>
+                    </section>
+                </main>
+
+                <aside class="col-md-3">
+                    <div class="list-group">
+                        <a
+                            href="https://www.fi.unju.edu.ar/servicios/biblioteca.html"
+                            target="_blank"
+                            class="list-group-item list-group-item-action"
+                        >
+                            Biblioteca
+                        </a>
+                        <a
+                            href="https://www.fi.unju.edu.ar/secretarias/sec-academica/calendario-academico.html"
+                            target="_blank"
+                            class="list-group-item list-group-item-action"
+                        >
+                            Calendario académico
+                        </a>
+                        <a
+                            href="https://alumnos.unju.edu.ar/unju/"
+                            target="_blank"
+                            class="list-group-item list-group-item-action"
+                        >
+                            Siu Guarani
+                        </a>
+                        <a
+                            href="https://www.fi.unju.edu.ar/secretarias/sec-academica/programas-de-materias.html"
+                            target="_blank"
+                            class="list-group-item list-group-item-action"
+                        >
+                            Programa de Materias
+                        </a>
+                        <a
+                            href="https://www.fi.unju.edu.ar/modelos-de-notas.html"
+                            target="_blank"
+                            class="list-group-item list-group-item-action"
+                        >
+                            Modelo de Notas
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head data-th-replace="~{/layouts/header :: head}">
+    </head>
+    <body>
+        <header data-th-replace="~{/layouts/header :: header}"></header>
+        <section class="container">
+            <h2 class="text-center my-5">Inscripcion a Materia</h2>
+            <h4 class="text-center my-5" th:text="${getMat} ? 'Seleccione materia' : 'Ingrese LU para validar'"></h4>
+            <div th:if="${encontrado}" id="alert" class="alert alert-success" role="alert">
+                Alumno encontrado
+            </div>
+            <div th:if="${isUpdated}" id="alert" class="alert alert-success" role="alert">
+                Inscripción realizada correctamente
+            </div>
+            <div th:if="${isNotUpdated}" id="alertEdit" class="alert alert-danger" role="alert">
+        		LU del alumno no encontrada
+      		</div>
+            <div class="mx-auto" style="max-width: 576px">
+                <form
+                    data-th-action="${getMat} ? '/inscripcion/inscribir' : '/inscripcion/validar'"
+                    th:object="${alumno}"
+                    method="post"
+                >
+                    <div th:if="${getMat}">
+                    <input type="hidden"
+                           name="idAlumno"
+                           th:field="*{idAlumno}" />
+                	</div>
+                   
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">L.U</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="codigo"
+                            name="codigo"
+                            th:readonly="${getMat}"
+                            required
+                            th:field="*{lu}"
+                        />
+                    </div>
+                    <div class="mb-3" th:if="${getMat}">
+				  		<label for="MateriaCarrera" class="form-label custom-label">Materias:</label>
+				  		<select class="form-select" id="MateriaID" name="MateriaID">
+				  			<option value="">-- Selecciona un Materia --</option>
+				  			<option th:each="m: ${materias}" th:value="${m.idMateria}" th:text="${m.nombre}"></option>
+				  		</select>
+					</div>
+                    <button  type="submit" class="btn btn-primary" th:text="${getMat ? 'Inscribir' : 'Validar'}"></button>
+                </form>
+            </div>
+        </section>
+
+        <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+
+
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+   		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body>
+</html>

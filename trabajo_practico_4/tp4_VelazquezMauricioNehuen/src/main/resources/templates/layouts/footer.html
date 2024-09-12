@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="es">
+    <head th:replace="~{/layouts/header :: head}"></head>
+
+    <body>
+
+        <footer th:fragment="footer" class="bg-light text-center text-lg-start mt-5">
+            <div class="container p-4">
+                <div class="row justify-content-between">
+                    <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">FACULTAD DE INGENIERÍA - UNJu</h5>
+                        <hr>
+                        <p>Ítalo Palanca Nº 10</p>
+                        <p>San Salvador de Jujuy Jujuy - Argentina</p>
+                        <p>
+                            <a href="https://www.fi.unju.edu.ar/servicios/telefonos.html" target="_blank">Telefonos</a>
+                        </p>
+                        <p>
+                            <a href="mailto:ingenieria@unju.edu.ar">info@fi.unju.edu.ar</a>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Aviso Legal</h5>
+                        <hr>
+                        <p>
+                            <a href="https://www.fi.unju.edu.ar/terminos-y-condiciones" target="_blank">Terminos y Condiciones</a>
+                        </p>
+                        <p>
+                            <a
+                                    href="https://www.fi.unju.edu.ar/condiciones-de-uso-correo-electronico"
+                                    target="_blank"
+                            >
+                                Condiciones de uso del Correo Electrónico
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Síguenos en</h5>
+                        <hr>
+                        <a href="https://www.facebook.com/fiunju/" class="btn btn-primary btn-sm mr-2" target="_blank">Facebook</a>
+                        <a href="https://www.instagram.com/fiunju/" class="btn btn-danger btn-sm mr-2" target="_blank">Instagram</a>
+                        <a href="https://www.linkedin.com/school/facultad-de-ingenieria-unju/" class="btn btn-info btn-sm" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                Copyright © 2014-2022 - Facultad de Ingeniería - UNJu
+            </div>
+        </footer>
+    </body>
+</html>
